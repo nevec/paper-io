@@ -25,8 +25,9 @@ class GameClient:
 
             if green_player and blue_player:
                 pygame.draw.rect(self.canvas, THECOLORS["green"],
-                             pygame.Rect(green_player.x * 5, green_player.y * 5, 15, 15))
-                pygame.draw.rect(self.canvas, THECOLORS["blue"], pygame.Rect(blue_player.x * 5, blue_player.y * 5, 15, 15))
+                                 pygame.Rect(green_player.x * 5, green_player.y * 5 + 60, 15, 15))
+                pygame.draw.rect(self.canvas, THECOLORS["blue"],
+                                 pygame.Rect(blue_player.x * 5, blue_player.y * 5 + 60, 15, 15))
 
             if pygame.event.get(eventtype=QUIT) or pygame.key.get_pressed()[K_ESCAPE]:
                 return
@@ -52,7 +53,7 @@ class GameClient:
         try:
             self._prepare_gui()
             self._run_event_loop()
-        except (ConnectionError, EOFError):
+        except (ConnectionError, EOFError, KeyboardInterrupt):
             pass
         finally:
             print("bye")
@@ -61,7 +62,7 @@ class GameClient:
 
 
 def main():
-    game = GameClient("127.0.0.1", 22000)
+    game = GameClient("127.0.0.1", 21000)
     game.play()
 
 
